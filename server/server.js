@@ -1,42 +1,45 @@
-import express from 'express';
-import mongoose from 'mongoose';
-import cors from 'cors';
-import dotenv from 'dotenv';
-import lessonRoutes from './routes/lessons.js';
-import userRoutes from './routes/users.js';
-import discussionRoutes from './routes/discussions.js';
-import authRoutes from './routes/auth.js';
+const express = require("express")
+const { ApolloServer } = require("apollo-server-express")
+const path = require("path")
+require("dotenv").config()
+const { authMiddleware } = require("./utils/auth")
+const { typeDefs, resolvers } = require("./schemas")
+const db = require("./config/connection")
 
-// Load environment variables
-dotenv.config();
+const PORT = process.env.PORT || 3001
+const app = express()
 
-const app = express();
-const PORT = process.env.PORT || 5000;
+// Set up Apollo Server
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  context: authMiddleware,
+})
 
-// Middleware
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// Apply Apollo Server middleware
+const startApolloServer = async () => {
+  await server.start()
+  server.applyMiddleware({ app })
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
+  app.use(express.urlencoded({ extended: false }))
+  app.use(express.json())
 
-// Routes
-app.use('/api/lessons', lessonRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/discussions', discussionRoutes);
-app.use('/api/auth', authRoutes);
+  // Serve up static assets
+  if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "../client/build")))
+  }
 
-// Basic route
-app.get('/', (req, res) => {
-  res.send('ABC Classroom API is running');
-});
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "../client/build/index.html"))
+  })
 
-// Start server
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+  db.once("open", () => {
+    app.listen(PORT, () => {
+      console.log(`API server running on port ${PORT}!`)
+      console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`)
+    })
+  })
+}
 
-export default app;
+// Start the server
+startApolloServer()
