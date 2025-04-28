@@ -14,7 +14,6 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-/* Custom scrollbar for a pastel look */
 ::-webkit-scrollbar {
   width: 10px;
 }

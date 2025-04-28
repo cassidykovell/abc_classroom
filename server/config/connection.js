@@ -1,12 +1,10 @@
 const mongoose = require("mongoose")
 require("dotenv").config()
 
-// Set strictQuery to suppress the deprecation warning
 mongoose.set("strictQuery", false)
 
 console.log("Attempting to connect to MongoDB...")
 
-// Connect to MongoDB
 mongoose
   .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,

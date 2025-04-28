@@ -8,7 +8,6 @@ const Profile = () => {
   const { loading, data } = useQuery(GET_ME)
   const user = data?.me || {}
 
-  // If not logged in, redirect to login page
   if (!Auth.loggedIn()) {
     return <Navigate to="/login" />
   }

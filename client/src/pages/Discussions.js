@@ -18,7 +18,6 @@ const Discussions = () => {
 
   const handleSearch = (e) => {
     e.preventDefault()
-    // The query will automatically re-run when searchTerm changes
   }
 
   return (

@@ -56,7 +56,6 @@ const activitySchema = new Schema({
   },
 })
 
-// Create a text index for searching
 activitySchema.index({
   lessonName: "text",
   tags: "text",

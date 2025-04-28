@@ -6,13 +6,11 @@ require("dotenv").config()
 
 db.once("open", async () => {
   try {
-    // Clean up existing data
     await Activity.deleteMany({})
     await User.deleteMany({})
 
     console.log("All data cleared. Starting seed...")
 
-    // Create users
     const users = [
       {
         username: "sarah_teacher",
@@ -39,7 +37,6 @@ db.once("open", async () => {
     const createdUsers = await User.insertMany(users)
     console.log("Users seeded successfully!")
 
-    // Create activities
     const activities = [
       {
         lessonName: "Exploring Fractions Through Art",
@@ -197,13 +194,10 @@ db.once("open", async () => {
     const createdActivities = await Activity.insertMany(activities)
     console.log("Activities seeded successfully!")
 
-    // Update users with their activities
     for (const activity of createdActivities) {
       await User.findOneAndUpdate({ username: activity.username }, { $push: { activities: activity._id } })
     }
 
-    // Set up some saved activities
-    // Sarah saves John's and Maria's activities
     const sarahUser = await User.findOne({ username: "sarah_teacher" })
     const johnActivities = await Activity.find({ username: "john_educator" })
     const mariaActivities = await Activity.find({ username: "maria_instructor" })
@@ -212,13 +206,11 @@ db.once("open", async () => {
       $push: { savedActivities: { $each: [johnActivities[0]._id, mariaActivities[0]._id] } },
     })
 
-    // John saves David's activities
     const johnUser = await User.findOne({ username: "john_educator" })
     const davidActivities = await Activity.find({ username: "david_professor" })
 
     await User.findByIdAndUpdate(johnUser._id, { $push: { savedActivities: { $each: [davidActivities[0]._id] } } })
 
-    // Maria saves Sarah's activities
     const mariaUser = await User.findOne({ username: "maria_instructor" })
     const sarahActivities = await Activity.find({ username: "sarah_teacher" })
 
@@ -228,7 +220,6 @@ db.once("open", async () => {
 
     console.log("User saved activities updated successfully!")
 
-    // Seed discussions
     await seedDiscussions()
 
     console.log("All seeds completed successfully!")

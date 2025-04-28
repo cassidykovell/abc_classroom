@@ -3,11 +3,9 @@ const { Question, Answer } = require("../models")
 const seedDiscussions = async () => {
   console.log("Seeding discussions...")
 
-  // Clean up existing data
   await Question.deleteMany({})
   await Answer.deleteMany({})
 
-  // Create questions
   const questions = [
     {
       title: "Best strategies for teaching fractions to 3rd graders?",
@@ -17,11 +15,11 @@ const seedDiscussions = async () => {
       tags: ["math", "fractions", "elementary", "3rd grade"],
     },
     {
-      title: "Classroom management techniques for middle school",
+      title: "Classroom management techniques for elementary school",
       content:
-        "I'm a new teacher working with 7th graders and finding it challenging to keep the class focused. What classroom management techniques have been effective for you with middle school students?",
+        "I'm a new teacher working with 3rd graders and finding it challenging to keep the class focused. What classroom management techniques have been effective for you with elementary school students?",
       username: "john_educator",
-      tags: ["classroom management", "middle school", "behavior"],
+      tags: ["classroom management", "behavior"],
     },
     {
       title: "Incorporating technology in history lessons",
@@ -38,18 +36,17 @@ const seedDiscussions = async () => {
       tags: ["ADHD", "accommodations", "special education"],
     },
     {
-      title: "Creative writing prompts for high school",
+      title: "Creative writing prompts for elementary school",
       content:
-        "Looking for some fresh creative writing prompts for my high school English class. What prompts have sparked the most engagement and creativity from your students?",
+        "Looking for some fresh creative writing prompts for my elementary school English class. What prompts have sparked the most engagement and creativity from your students?",
       username: "sarah_teacher",
-      tags: ["english", "creative writing", "high school"],
+      tags: ["english", "creative writing", "elementary school"],
     },
   ]
 
   const createdQuestions = await Question.insertMany(questions)
   console.log(`${createdQuestions.length} questions seeded successfully!`)
 
-  // Create answers
   const answers = [
     {
       content:
@@ -121,7 +118,6 @@ const seedDiscussions = async () => {
   const createdAnswers = await Answer.insertMany(answers)
   console.log(`${createdAnswers.length} answers seeded successfully!`)
 
-  // Update questions with answer IDs
   for (const answer of createdAnswers) {
     await Question.findByIdAndUpdate(answer.questionId, { $push: { answers: answer._id } }, { new: true })
   }

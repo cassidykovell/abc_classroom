@@ -25,7 +25,6 @@ const QuestionDetail = () => {
   const question = data?.question || {}
   const answers = question.answers || []
 
-  // Check if the current user is the author of the question
   const isQuestionAuthor = Auth.loggedIn() && Auth.getProfile().data.username === question.username
 
   const handleAddAnswer = async (e) => {

@@ -24,7 +24,6 @@ const UploadActivity = () => {
   const [fileInputs, setFileInputs] = useState([{ id: 1, file: null }])
   const [addActivity] = useMutation(ADD_ACTIVITY)
 
-  // If not logged in, redirect to login page
   if (!Auth.loggedIn()) {
     return <Navigate to="/login" />
   }
@@ -71,10 +70,6 @@ const UploadActivity = () => {
     event.preventDefault()
 
     try {
-      // In a real app, you would upload files to a storage service here
-      // and get back URLs to store in the database
-
-      // For this simple version, we'll just store the activity without files
       const { data } = await addActivity({
         variables: {
           ...formState,
@@ -89,7 +84,7 @@ const UploadActivity = () => {
   }
 
   const subjects = ["Math", "Science", "English", "History", "Art", "Music", "Physical Education", "Computer Science"]
-  const gradeLevels = ["K", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+  const gradeLevels = ["K", "1", "2", "3", "4", "5"]
   const durations = ["15 minutes", "30 minutes", "45 minutes", "1 hour", "1.5 hours", "2 hours", "1 day", "1 week"]
 
   return (

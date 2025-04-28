@@ -10,7 +10,7 @@ const Home = () => {
   const [searchTerm, setSearchTerm] = useState("")
   const { loading, error, data, refetch } = useQuery(QUERY_ACTIVITIES, {
     variables: { searchTerm },
-    fetchPolicy: "network-only", // Don't use cache for this query
+    fetchPolicy: "network-only", 
   })
 
   const activities = data?.activities || []

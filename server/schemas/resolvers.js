@@ -138,15 +138,12 @@ const resolvers = {
           throw new Error("Activity not found")
         }
 
-        // Check if the current user is the owner of the activity
         if (activity.username !== context.user.username) {
           throw new AuthenticationError("You can only delete activities you've created")
         }
 
-        // Delete the activity
         const deletedActivity = await Activity.findByIdAndDelete(activityId)
 
-        // Remove the activity from the user's activities array
         await User.updateMany(
           {},
           {
@@ -202,15 +199,12 @@ const resolvers = {
           throw new Error("Question not found")
         }
 
-        // Only the question author can accept an answer
         if (question.username !== context.user.username) {
           throw new AuthenticationError("Only the question author can accept an answer")
         }
 
-        // Reset all answers for this question to not accepted
         await Answer.updateMany({ questionId: answer.questionId }, { isAccepted: false })
 
-        // Set this answer as accepted
         const updatedAnswer = await Answer.findByIdAndUpdate(answerId, { isAccepted: true }, { new: true })
 
         return updatedAnswer
@@ -225,15 +219,10 @@ const resolvers = {
           throw new Error("Question not found")
         }
 
-        // Check if the current user is the owner of the question
         if (question.username !== context.user.username) {
           throw new AuthenticationError("You can only delete questions you've created")
         }
-
-        // Delete all answers associated with this question
         await Answer.deleteMany({ questionId })
-
-        // Delete the question
         await Question.findByIdAndDelete(questionId)
 
         return question
@@ -248,15 +237,11 @@ const resolvers = {
           throw new Error("Answer not found")
         }
 
-        // Check if the current user is the owner of the answer
         if (answer.username !== context.user.username) {
           throw new AuthenticationError("You can only delete answers you've created")
         }
-
-        // Remove the answer from the question's answers array
         await Question.findByIdAndUpdate(answer.questionId, { $pull: { answers: answerId } })
 
-        // Delete the answer
         await Answer.findByIdAndDelete(answerId)
 
         return answer

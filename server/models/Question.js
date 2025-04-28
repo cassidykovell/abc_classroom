@@ -37,14 +37,12 @@ const questionSchema = new Schema(
   },
 )
 
-// Create a text index for searching
 questionSchema.index({
   title: "text",
   content: "text",
   tags: "text",
 })
 
-// Virtual for answer count
 questionSchema.virtual("answerCount").get(function () {
   return this.answers.length
 })

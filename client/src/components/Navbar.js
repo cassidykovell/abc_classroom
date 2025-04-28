@@ -7,7 +7,6 @@ import Auth from "../utils/auth"
 const Navbar = () => {
   const navigate = useNavigate()
   const { data } = useQuery(GET_ME)
-  // We'll use the user data in the JSX below
   const userData = data?.me || {}
 
   const logout = (event) => {
@@ -42,10 +41,10 @@ const Navbar = () => {
           ) : (
             <>
               <Link to="/login" className="text-gray-800 hover:text-pastel-darkPurple">
-                Login
+                Log In
               </Link>
               <Link to="/signup" className="text-gray-800 hover:text-pastel-darkPurple">
-                Signup
+                Sign Up
               </Link>
             </>
           )}

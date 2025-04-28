@@ -46,7 +46,6 @@ const ActivityDetail = () => {
   }
 
   const handleDownload = () => {
-    // In a real app, this would download the activity files
     alert("Download functionality would be implemented here.")
   }
 

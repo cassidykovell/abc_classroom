@@ -6,24 +6,20 @@ const { authMiddleware } = require("./utils/auth")
 const { typeDefs, resolvers } = require("./schemas")
 const db = require("./config/connection")
 
-// Use PORT from environment variables or fallback to 3001
-// If 3001 is in use, you can manually change this to another port like 3002
 const PORT = process.env.PORT || 3001
 const app = express()
 
-// Set up Apollo Server
+
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: authMiddleware,
   formatError: (err) => {
-    // Log server-side errors to help with debugging
     console.error(err)
     return err
   },
 })
 
-// Apply Apollo Server middleware
 const startApolloServer = async () => {
   await server.start()
   server.applyMiddleware({ app })
@@ -31,12 +27,10 @@ const startApolloServer = async () => {
   app.use(express.urlencoded({ extended: false }))
   app.use(express.json())
 
-  // Serve up static assets
   if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.join(__dirname, "../client/build")))
   }
 
-  // Add this inside the startApolloServer function, before the app.get("*") route
   app.get("/api/debug/activities", async (req, res) => {
     try {
       const { Activity } = require("./models")
@@ -97,7 +91,6 @@ const startApolloServer = async () => {
   })
 }
 
-// Start the server
 startApolloServer().catch((err) => {
   console.error("Failed to start server:", err)
   process.exit(1)
