@@ -37,11 +37,11 @@ const Signup = () => {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-10">
-      <h2 className="text-2xl font-bold mb-6">Sign Up</h2>
+    <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-6 text-gray-800">Sign Up</h2>
       <form onSubmit={handleFormSubmit} className="space-y-4">
         <div>
-          <label htmlFor="username" className="block mb-1">
+          <label htmlFor="username" className="block mb-1 text-gray-700">
             Username
           </label>
           <input
@@ -51,11 +51,11 @@ const Signup = () => {
             value={formState.username}
             onChange={handleChange}
             required
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-pastel-purple"
           />
         </div>
         <div>
-          <label htmlFor="email" className="block mb-1">
+          <label htmlFor="email" className="block mb-1 text-gray-700">
             Email
           </label>
           <input
@@ -65,11 +65,11 @@ const Signup = () => {
             value={formState.email}
             onChange={handleChange}
             required
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-pastel-purple"
           />
         </div>
         <div>
-          <label htmlFor="password" className="block mb-1">
+          <label htmlFor="password" className="block mb-1 text-gray-700">
             Password
           </label>
           <input
@@ -79,17 +79,17 @@ const Signup = () => {
             value={formState.password}
             onChange={handleChange}
             required
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-pastel-purple"
           />
         </div>
         {error && <div className="text-red-500">{error.message}</div>}
-        <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+        <button type="submit" className="w-full bg-pastel-blue text-gray-800 py-2 rounded hover:bg-opacity-80">
           Sign Up
         </button>
       </form>
-      <p className="mt-4 text-center">
+      <p className="mt-4 text-center text-gray-700">
         Already have an account?{" "}
-        <Link to="/login" className="text-blue-600 hover:underline">
+        <Link to="/login" className="text-pastel-purple hover:underline">
           Login
         </Link>
       </p>

@@ -7,7 +7,6 @@ import Auth from "../utils/auth"
 const Navbar = () => {
   const navigate = useNavigate()
   const { data } = useQuery(GET_ME)
-  // We'll use the user data in the JSX below
   const userData = data?.me || {}
 
   const logout = (event) => {
@@ -17,32 +16,32 @@ const Navbar = () => {
   }
 
   return (
-    <nav className="bg-blue-600 p-4">
+    <nav className="bg-pastel-blue p-4 shadow-md">
       <div className="container mx-auto flex justify-between items-center">
-        <Link to="/" className="text-white text-xl font-bold">
+        <Link to="/" className="text-gray-800 text-xl font-bold">
           ABC Classroom
         </Link>
         <div className="flex space-x-4">
           {Auth.loggedIn() ? (
             <>
-              <span className="text-white">Welcome, {userData.username || "Teacher"}!</span>
-              <Link to="/profile" className="text-white hover:text-blue-200">
+              <span className="text-gray-800">Welcome, {userData.username || "Teacher"}!</span>
+              <Link to="/profile" className="text-gray-800 hover:text-pastel-purple">
                 Profile
               </Link>
-              <Link to="/upload" className="text-white hover:text-blue-200">
+              <Link to="/upload" className="text-gray-800 hover:text-pastel-purple">
                 Upload Activity
               </Link>
-              <button onClick={logout} className="text-white hover:text-blue-200">
+              <button onClick={logout} className="text-gray-800 hover:text-pastel-purple">
                 Logout
               </button>
             </>
           ) : (
             <>
-              <Link to="/login" className="text-white hover:text-blue-200">
-                Login
+              <Link to="/login" className="text-gray-800 hover:text-pastel-purple">
+                Log In
               </Link>
-              <Link to="/signup" className="text-white hover:text-blue-200">
-                Signup
+              <Link to="/signup" className="text-gray-800 hover:text-pastel-purple">
+                Sign Up
               </Link>
             </>
           )}

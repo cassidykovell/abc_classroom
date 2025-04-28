@@ -75,3 +75,24 @@ export const SAVE_ACTIVITY = gql`
     }
   }
 `
+
+export const REMOVE_SAVED_ACTIVITY = gql`
+  mutation removeActivity($activityId: ID!) {
+    removeActivity(activityId: $activityId) {
+      _id
+      username
+      savedActivities {
+        _id
+        lessonName
+      }
+    }
+  }
+`
+
+export const DELETE_ACTIVITY = gql`
+  mutation deleteActivity($activityId: ID!) {
+    deleteActivity(activityId: $activityId) {
+      _id
+    }
+  }
+`

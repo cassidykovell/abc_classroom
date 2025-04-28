@@ -60,6 +60,7 @@ const typeDefs = gql`
     ): Activity
     saveActivity(activityId: ID!): User
     removeActivity(activityId: ID!): User
+    deleteActivity(activityId: ID!): Activity
   }
 `
 

@@ -33,11 +33,11 @@ const Login = () => {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-10">
-      <h2 className="text-2xl font-bold mb-6">Login</h2>
+    <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-6 text-gray-800">Login</h2>
       <form onSubmit={handleFormSubmit} className="space-y-4">
         <div>
-          <label htmlFor="email" className="block mb-1">
+          <label htmlFor="email" className="block mb-1 text-gray-700">
             Email
           </label>
           <input
@@ -47,11 +47,11 @@ const Login = () => {
             value={formState.email}
             onChange={handleChange}
             required
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-pastel-purple"
           />
         </div>
         <div>
-          <label htmlFor="password" className="block mb-1">
+          <label htmlFor="password" className="block mb-1 text-gray-700">
             Password
           </label>
           <input
@@ -61,17 +61,17 @@ const Login = () => {
             value={formState.password}
             onChange={handleChange}
             required
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-pastel-purple"
           />
         </div>
         {error && <div className="text-red-500">{error.message}</div>}
-        <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+        <button type="submit" className="w-full bg-pastel-blue text-gray-800 py-2 rounded hover:bg-opacity-80">
           Login
         </button>
       </form>
-      <p className="mt-4 text-center">
+      <p className="mt-4 text-center text-gray-700">
         Don't have an account?{" "}
-        <Link to="/signup" className="text-blue-600 hover:underline">
+        <Link to="/signup" className="text-pastel-purple hover:underline">
           Sign up
         </Link>
       </p>

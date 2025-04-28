@@ -22,6 +22,8 @@ const resolvers = {
       return User.findOne({ username }).select("-__v -password").populate("activities").populate("savedActivities")
     },
     activities: async (parent, { searchTerm }) => {
+      console.log("Fetching activities with searchTerm:", searchTerm)
+
       const params = {}
 
       if (searchTerm) {
@@ -31,7 +33,9 @@ const resolvers = {
         ]
       }
 
-      return Activity.find(params).sort({ createdAt: -1 })
+      const activities = await Activity.find(params).sort({ createdAt: -1 })
+      console.log(`Found ${activities.length} activities`)
+      return activities
     },
     activity: async (parent, { activityId }) => {
       return Activity.findOne({ _id: activityId })
@@ -95,9 +99,41 @@ const resolvers = {
           { _id: context.user._id },
           { $pull: { savedActivities: activityId } },
           { new: true },
-        )
+        ).populate("savedActivities")
 
         return updatedUser
+      }
+      throw new AuthenticationError("You need to be logged in!")
+    },
+    deleteActivity: async (parent, { activityId }, context) => {
+      if (context.user) {
+        // Find the activity to check ownership
+        const activity = await Activity.findById(activityId)
+
+        if (!activity) {
+          throw new Error("Activity not found")
+        }
+
+        // Check if the current user is the owner of the activity
+        if (activity.username !== context.user.username) {
+          throw new AuthenticationError("You can only delete activities you've created")
+        }
+
+        // Delete the activity
+        const deletedActivity = await Activity.findByIdAndDelete(activityId)
+
+        // Remove the activity from the user's activities array
+        await User.updateMany(
+          {},
+          {
+            $pull: {
+              activities: activityId,
+              savedActivities: activityId,
+            },
+          },
+        )
+
+        return deletedActivity
       }
       throw new AuthenticationError("You need to be logged in!")
     },

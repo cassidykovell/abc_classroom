@@ -52,13 +52,13 @@ db.once("open", async () => {
         duration: "1 hour",
         instructions:
           "Begin by discussing fractions as parts of a whole. Show examples of fractions represented visually. Have students create their own fraction art by dividing shapes into equal parts and coloring them to represent different fractions. Display the artwork and have students explain their representations.",
-        tags: ["fractions", "math", "art", "visual learning", "elementary"],
+        tags: ["fractions", "math", "art", "visual learning"],
         username: "sarah_teacher",
       },
       {
         lessonName: "Building Simple Machines",
         subjects: ["Science", "Engineering"],
-        gradeLevel: ["4", "5", "6"],
+        gradeLevel: ["4", "5"],
         description:
           "Students will learn about simple machines by designing and building their own examples using everyday materials.",
         objectives:
@@ -73,7 +73,7 @@ db.once("open", async () => {
       {
         lessonName: "Poetry in Motion",
         subjects: ["English", "Physical Education"],
-        gradeLevel: ["6", "7", "8"],
+        gradeLevel: ["4", "5"],
         description:
           "Students will combine poetry and movement by creating and performing poems that incorporate physical actions.",
         objectives:
@@ -82,13 +82,13 @@ db.once("open", async () => {
         duration: "45 minutes",
         instructions:
           "Begin by reading examples of action poems. Discuss how words can convey movement. Have students write their own action poems. Then have them create movements to accompany their poems. Students will perform their poems with movements for the class.",
-        tags: ["poetry", "language arts", "movement", "expression", "middle school"],
+        tags: ["poetry", "language arts", "movement", "expression"],
         username: "maria_instructor",
       },
       {
         lessonName: "Historical Time Capsule",
         subjects: ["History", "Art"],
-        gradeLevel: ["7", "8", "9"],
+        gradeLevel: ["4", "5"],
         description:
           "Students will create a time capsule representing a specific historical period, including artifacts, letters, and news items from that time.",
         objectives:
@@ -97,13 +97,13 @@ db.once("open", async () => {
         duration: "1 week",
         instructions:
           "Assign each student or group a different historical period. Have them research daily life, major events, and cultural aspects of that period. Students will create a time capsule containing at least five items that represent their historical period, including a newspaper, a letter from a person living in that time, and three artifacts. Students will present their time capsules to the class, explaining the significance of each item.",
-        tags: ["history", "research", "project-based learning", "artifacts", "middle school"],
+        tags: ["history", "research", "project-based learning", "artifacts"],
         username: "david_professor",
       },
       {
         lessonName: "Coding with Scratch",
         subjects: ["Computer Science", "Math"],
-        gradeLevel: ["3", "4", "5", "6"],
+        gradeLevel: ["3", "4", "5"],
         description:
           "Introduction to coding concepts using the Scratch visual programming language. Students will create simple animations and games while learning fundamental programming concepts.",
         objectives:
@@ -112,13 +112,13 @@ db.once("open", async () => {
         duration: "1 hour",
         instructions:
           "Begin with a brief introduction to Scratch interface. Demonstrate basic blocks and how to connect them. Guide students through creating a simple animation. Present a challenge for students to modify their animation or create a simple game. Allow time for students to share their creations.",
-        tags: ["coding", "computer science", "Scratch", "programming", "elementary", "STEM"],
+        tags: ["coding", "computer science", "Scratch", "programming", "STEM"],
         username: "sarah_teacher",
       },
       {
         lessonName: "Ecosystem in a Bottle",
         subjects: ["Science", "Environmental Studies"],
-        gradeLevel: ["5", "6", "7", "8"],
+        gradeLevel: ["3", "4", "5"],
         description:
           "Students will create self-contained ecosystems in plastic bottles to observe and learn about ecological principles, nutrient cycles, and interdependence.",
         objectives:
@@ -127,7 +127,7 @@ db.once("open", async () => {
         duration: "1 hour setup, ongoing observation",
         instructions:
           "Discuss ecosystems and their components. Demonstrate how to create a terrarium in a bottle. Have students create their own ecosystems with layers of rocks, soil, and plants. Seal the bottles and place them in a location with indirect sunlight. Have students observe and journal about changes over several weeks.",
-        tags: ["ecosystems", "biology", "environmental science", "long-term project", "middle school"],
+        tags: ["ecosystems", "biology", "environmental science", "long-term project"],
         username: "john_educator",
       },
       {
@@ -143,13 +143,13 @@ db.once("open", async () => {
         duration: "45 minutes",
         instructions:
           "Begin by listening to music from a specific culture. Discuss the instruments, rhythms, and cultural context. Show pictures or videos of the instruments being played. Have students create simple versions of instruments from that culture. Allow students to play their instruments along with the recorded music.",
-        tags: ["music", "cultural studies", "instruments", "global awareness", "elementary"],
+        tags: ["music", "cultural studies", "instruments", "global awareness"],
         username: "maria_instructor",
       },
       {
         lessonName: "Debate Club: Current Events",
         subjects: ["Social Studies", "English"],
-        gradeLevel: ["9", "10", "11", "12"],
+        gradeLevel: ["5"],
         description:
           "Students will research current events and participate in structured debates, developing critical thinking, research, and public speaking skills.",
         objectives:
@@ -158,13 +158,13 @@ db.once("open", async () => {
         duration: "1 hour",
         instructions:
           "Select an age-appropriate current event topic. Divide students into affirmative and negative teams. Provide time for research and preparation. Conduct a structured debate with timed segments for opening statements, rebuttals, and closing arguments. After the debate, discuss the strengths of arguments on both sides and what students learned about the topic.",
-        tags: ["debate", "current events", "critical thinking", "public speaking", "high school"],
+        tags: ["debate", "current events", "critical thinking", "public speaking"],
         username: "david_professor",
       },
       {
         lessonName: "Storytelling Through Photography",
         subjects: ["Art", "English"],
-        gradeLevel: ["7", "8", "9", "10", "11", "12"],
+        gradeLevel: ["4","5"],
         description:
           "Students will learn to tell stories through photography, capturing images that convey narrative elements and emotions.",
         objectives:
@@ -173,13 +173,13 @@ db.once("open", async () => {
         duration: "2 hours",
         instructions:
           "Discuss elements of visual storytelling and composition. Show examples of narrative photography. Assign students a theme or allow them to choose their own. Have students plan a 5-7 image photo story. Allow time for taking photos around the school or neighborhood. Have students arrange their photos in sequence and write brief captions. Share and discuss the photo stories.",
-        tags: ["photography", "visual arts", "storytelling", "digital media", "middle school", "high school"],
+        tags: ["photography", "visual arts", "storytelling", "digital media"],
         username: "sarah_teacher",
       },
       {
         lessonName: "Geometry Scavenger Hunt",
         subjects: ["Math"],
-        gradeLevel: ["3", "4", "5", "6"],
+        gradeLevel: ["3", "4", "5"],
         description:
           "Students will search for geometric shapes and concepts in the real world, reinforcing their understanding of geometry through practical application.",
         objectives:
@@ -188,7 +188,7 @@ db.once("open", async () => {
         duration: "45 minutes",
         instructions:
           "Review geometric shapes and concepts. Provide students with a checklist of shapes and concepts to find. Divide students into small groups and assign areas to search. Have students photograph examples of each item on their checklist. Return to class and share findings, discussing how geometry appears in everyday objects and architecture.",
-        tags: ["geometry", "math", "scavenger hunt", "real-world application", "elementary", "middle school"],
+        tags: ["geometry", "math", "scavenger hunt", "real-world application"],
         username: "john_educator",
       },
     ]

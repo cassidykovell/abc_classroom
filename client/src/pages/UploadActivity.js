@@ -93,11 +93,11 @@ const UploadActivity = () => {
   const durations = ["15 minutes", "30 minutes", "45 minutes", "1 hour", "1.5 hours", "2 hours", "1 day", "1 week"]
 
   return (
-    <div className="max-w-2xl mx-auto mt-10">
-      <h2 className="text-2xl font-bold mb-6">Upload Activity</h2>
+    <div className="max-w-2xl mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-6 text-gray-800">Upload Activity</h2>
       <form onSubmit={handleFormSubmit} className="space-y-6">
         <div>
-          <label htmlFor="lessonName" className="block mb-1 font-medium">
+          <label htmlFor="lessonName" className="block mb-1 font-medium text-gray-700">
             Lesson Name
           </label>
           <input
@@ -107,13 +107,13 @@ const UploadActivity = () => {
             value={formState.lessonName}
             onChange={handleChange}
             required
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-pastel-purple"
           />
         </div>
 
         <div>
-          <label className="block mb-1 font-medium">Subjects</label>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+          <label className="block mb-1 font-medium text-gray-700">Subjects</label>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-2 bg-pastel-gray bg-opacity-30 p-3 rounded">
             {subjects.map((subject) => (
               <div key={subject} className="flex items-center">
                 <input
@@ -122,17 +122,19 @@ const UploadActivity = () => {
                   name="subjects"
                   value={subject}
                   onChange={handleCheckboxChange}
-                  className="mr-2"
+                  className="mr-2 accent-pastel-purple"
                 />
-                <label htmlFor={`subject-${subject}`}>{subject}</label>
+                <label htmlFor={`subject-${subject}`} className="text-gray-700">
+                  {subject}
+                </label>
               </div>
             ))}
           </div>
         </div>
 
         <div>
-          <label className="block mb-1 font-medium">Grade Level</label>
-          <div className="grid grid-cols-3 md:grid-cols-6 gap-2">
+          <label className="block mb-1 font-medium text-gray-700">Grade Level</label>
+          <div className="grid grid-cols-3 md:grid-cols-6 gap-2 bg-pastel-gray bg-opacity-30 p-3 rounded">
             {gradeLevels.map((grade) => (
               <div key={grade} className="flex items-center">
                 <input
@@ -141,16 +143,18 @@ const UploadActivity = () => {
                   name="gradeLevel"
                   value={grade}
                   onChange={handleCheckboxChange}
-                  className="mr-2"
+                  className="mr-2 accent-pastel-purple"
                 />
-                <label htmlFor={`grade-${grade}`}>{grade}</label>
+                <label htmlFor={`grade-${grade}`} className="text-gray-700">
+                  {grade}
+                </label>
               </div>
             ))}
           </div>
         </div>
 
         <div>
-          <label htmlFor="description" className="block mb-1 font-medium">
+          <label htmlFor="description" className="block mb-1 font-medium text-gray-700">
             Description
           </label>
           <textarea
@@ -160,12 +164,12 @@ const UploadActivity = () => {
             onChange={handleChange}
             required
             rows="3"
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-pastel-purple"
           ></textarea>
         </div>
 
         <div>
-          <label htmlFor="objectives" className="block mb-1 font-medium">
+          <label htmlFor="objectives" className="block mb-1 font-medium text-gray-700">
             Objectives
           </label>
           <textarea
@@ -175,12 +179,12 @@ const UploadActivity = () => {
             onChange={handleChange}
             required
             rows="3"
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-pastel-purple"
           ></textarea>
         </div>
 
         <div>
-          <label htmlFor="materialsNeeded" className="block mb-1 font-medium">
+          <label htmlFor="materialsNeeded" className="block mb-1 font-medium text-gray-700">
             Materials Needed
           </label>
           <textarea
@@ -189,12 +193,12 @@ const UploadActivity = () => {
             value={formState.materialsNeeded}
             onChange={handleChange}
             rows="3"
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-pastel-purple"
           ></textarea>
         </div>
 
         <div>
-          <label htmlFor="duration" className="block mb-1 font-medium">
+          <label htmlFor="duration" className="block mb-1 font-medium text-gray-700">
             Duration
           </label>
           <select
@@ -202,7 +206,7 @@ const UploadActivity = () => {
             id="duration"
             value={formState.duration}
             onChange={handleChange}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-pastel-purple"
           >
             {durations.map((duration) => (
               <option key={duration} value={duration}>
@@ -213,7 +217,7 @@ const UploadActivity = () => {
         </div>
 
         <div>
-          <label htmlFor="instructions" className="block mb-1 font-medium">
+          <label htmlFor="instructions" className="block mb-1 font-medium text-gray-700">
             Instructions
           </label>
           <textarea
@@ -223,28 +227,32 @@ const UploadActivity = () => {
             onChange={handleChange}
             required
             rows="5"
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-pastel-purple"
           ></textarea>
         </div>
 
         <div>
-          <label className="block mb-1 font-medium">Upload Files</label>
+          <label className="block mb-1 font-medium text-gray-700">Upload Files</label>
           {fileInputs.map((fileInput) => (
             <div key={fileInput.id} className="mb-2">
               <input
                 type="file"
                 onChange={(e) => handleFileChange(fileInput.id, e)}
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border rounded bg-white"
               />
             </div>
           ))}
-          <button type="button" onClick={addFileInput} className="mt-2 bg-gray-200 px-4 py-2 rounded hover:bg-gray-300">
+          <button
+            type="button"
+            onClick={addFileInput}
+            className="mt-2 bg-pastel-gray px-4 py-2 rounded hover:bg-opacity-80 text-gray-800"
+          >
             Add Another File
           </button>
         </div>
 
         <div>
-          <label htmlFor="tags" className="block mb-1 font-medium">
+          <label htmlFor="tags" className="block mb-1 font-medium text-gray-700">
             Tags (comma separated)
           </label>
           <input
@@ -254,11 +262,11 @@ const UploadActivity = () => {
             value={formState.tags}
             onChange={handleChange}
             placeholder="math, algebra, equations"
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded focus:outline-none focus:ring-2 focus:ring-pastel-purple"
           />
         </div>
 
-        <button type="submit" className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700">
+        <button type="submit" className="w-full bg-pastel-blue text-gray-800 py-2 rounded hover:bg-opacity-80">
           Upload Activity
         </button>
       </form>

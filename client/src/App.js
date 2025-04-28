@@ -37,16 +37,18 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <Navbar />
-        <div className="container mx-auto p-4">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/upload" element={<UploadActivity />} />
-            <Route path="/activity/:id" element={<ActivityDetail />} />
-          </Routes>
+        <div className="min-h-screen bg-gradient-to-br from-pastel-blue/30 to-pastel-purple/30">
+          <Navbar />
+          <div className="container mx-auto p-4">
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/profile" element={<Profile />} />
+              <Route path="/upload" element={<UploadActivity />} />
+              <Route path="/activity/:id" element={<ActivityDetail />} />
+            </Routes>
+          </div>
         </div>
       </Router>
     </ApolloProvider>
