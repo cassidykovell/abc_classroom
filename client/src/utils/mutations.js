@@ -96,3 +96,53 @@ export const DELETE_ACTIVITY = gql`
     }
   }
 `
+
+export const ADD_QUESTION = gql`
+  mutation addQuestion($title: String!, $content: String!, $tags: [String]) {
+    addQuestion(title: $title, content: $content, tags: $tags) {
+      _id
+      title
+      content
+      username
+      createdAt
+      tags
+    }
+  }
+`
+
+export const ADD_ANSWER = gql`
+  mutation addAnswer($questionId: ID!, $content: String!) {
+    addAnswer(questionId: $questionId, content: $content) {
+      _id
+      content
+      username
+      createdAt
+      isAccepted
+    }
+  }
+`
+
+export const ACCEPT_ANSWER = gql`
+  mutation acceptAnswer($answerId: ID!) {
+    acceptAnswer(answerId: $answerId) {
+      _id
+      isAccepted
+    }
+  }
+`
+
+export const DELETE_QUESTION = gql`
+  mutation deleteQuestion($questionId: ID!) {
+    deleteQuestion(questionId: $questionId) {
+      _id
+    }
+  }
+`
+
+export const DELETE_ANSWER = gql`
+  mutation deleteAnswer($answerId: ID!) {
+    deleteAnswer(answerId: $answerId) {
+      _id
+    }
+  }
+`

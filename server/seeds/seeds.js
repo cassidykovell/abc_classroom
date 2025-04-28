@@ -1,6 +1,7 @@
 const db = require("../config/connection")
 const { User, Activity } = require("../models")
 const bcrypt = require("bcrypt")
+const seedDiscussions = require("./discussionSeeds")
 require("dotenv").config()
 
 db.once("open", async () => {
@@ -226,6 +227,10 @@ db.once("open", async () => {
     })
 
     console.log("User saved activities updated successfully!")
+
+    // Seed discussions
+    await seedDiscussions()
+
     console.log("All seeds completed successfully!")
     process.exit(0)
   } catch (err) {

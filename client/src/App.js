@@ -10,6 +10,9 @@ import Signup from "./pages/Signup"
 import Profile from "./pages/Profile"
 import UploadActivity from "./pages/UploadActivity"
 import ActivityDetail from "./pages/ActivityDetail"
+import Discussions from "./pages/Discussions"
+import QuestionDetail from "./pages/QuestionDetail"
+import AskQuestion from "./pages/AskQuestion"
 
 // Create an http link
 const httpLink = createHttpLink({
@@ -47,6 +50,9 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/upload" element={<UploadActivity />} />
               <Route path="/activity/:id" element={<ActivityDetail />} />
+              <Route path="/discussions" element={<Discussions />} />
+              <Route path="/discussions/:id" element={<QuestionDetail />} />
+              <Route path="/discussions/ask" element={<AskQuestion />} />
             </Routes>
           </div>
         </div>

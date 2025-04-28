@@ -35,6 +35,26 @@ const typeDefs = gql`
     user: User
   }
 
+  type Question {
+    _id: ID
+    title: String
+    content: String
+    username: String
+    createdAt: String
+    tags: [String]
+    answers: [Answer]
+    answerCount: Int
+  }
+
+  type Answer {
+    _id: ID
+    content: String
+    username: String
+    questionId: ID
+    createdAt: String
+    isAccepted: Boolean
+  }
+
   type Query {
     me: User
     users: [User]
@@ -42,6 +62,8 @@ const typeDefs = gql`
     activities(searchTerm: String): [Activity]
     activity(activityId: ID!): Activity
     userActivities(username: String!): [Activity]
+    questions(searchTerm: String): [Question]
+    question(questionId: ID!): Question
   }
 
   type Mutation {
@@ -61,6 +83,11 @@ const typeDefs = gql`
     saveActivity(activityId: ID!): User
     removeActivity(activityId: ID!): User
     deleteActivity(activityId: ID!): Activity
+    addQuestion(title: String!, content: String!, tags: [String]): Question
+    addAnswer(questionId: ID!, content: String!): Answer
+    acceptAnswer(answerId: ID!): Answer
+    deleteQuestion(questionId: ID!): Question
+    deleteAnswer(answerId: ID!): Answer
   }
 `
 

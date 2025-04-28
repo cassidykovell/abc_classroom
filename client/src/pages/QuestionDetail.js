@@ -60,7 +60,7 @@ const QuestionDetail = () => {
   return (
     <div className="max-w-4xl mx-auto mt-10">
       <div className="mb-6">
-        <Link to="/discussions" className="text-pastel-darkPurple hover:underline">
+        <Link to="/discussions" className="text-pastel-purple hover:underline">
           &larr; Back to Discussions
         </Link>
       </div>

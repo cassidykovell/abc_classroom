@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express")
-const { User, Activity } = require("../models")
+const { User, Activity, Question, Answer } = require("../models")
 const { signToken } = require("../utils/auth")
 
 const resolvers = {
@@ -43,6 +43,30 @@ const resolvers = {
     userActivities: async (parent, { username }) => {
       const params = { username }
       return Activity.find(params).sort({ createdAt: -1 })
+    },
+    questions: async (parent, { searchTerm }) => {
+      const params = {}
+
+      if (searchTerm) {
+        params.$or = [
+          { title: { $regex: searchTerm, $options: "i" } },
+          { content: { $regex: searchTerm, $options: "i" } },
+          { tags: { $in: [new RegExp(searchTerm, "i")] } },
+        ]
+      }
+
+      return Question.find(params)
+        .sort({ createdAt: -1 })
+        .populate({
+          path: "answers",
+          options: { sort: { isAccepted: -1, createdAt: -1 } },
+        })
+    },
+    question: async (parent, { questionId }) => {
+      return Question.findOne({ _id: questionId }).populate({
+        path: "answers",
+        options: { sort: { isAccepted: -1, createdAt: -1 } },
+      })
     },
   },
 
@@ -134,6 +158,108 @@ const resolvers = {
         )
 
         return deletedActivity
+      }
+      throw new AuthenticationError("You need to be logged in!")
+    },
+    addQuestion: async (parent, { title, content, tags }, context) => {
+      if (context.user) {
+        const question = await Question.create({
+          title,
+          content,
+          tags: tags || [],
+          username: context.user.username,
+        })
+
+        return question
+      }
+      throw new AuthenticationError("You need to be logged in to ask a question!")
+    },
+    addAnswer: async (parent, { questionId, content }, context) => {
+      if (context.user) {
+        const answer = await Answer.create({
+          content,
+          username: context.user.username,
+          questionId,
+        })
+
+        await Question.findByIdAndUpdate(questionId, { $push: { answers: answer._id } }, { new: true })
+
+        return answer
+      }
+      throw new AuthenticationError("You need to be logged in to answer a question!")
+    },
+    acceptAnswer: async (parent, { answerId }, context) => {
+      if (context.user) {
+        const answer = await Answer.findById(answerId)
+
+        if (!answer) {
+          throw new Error("Answer not found")
+        }
+
+        const question = await Question.findById(answer.questionId)
+
+        if (!question) {
+          throw new Error("Question not found")
+        }
+
+        // Only the question author can accept an answer
+        if (question.username !== context.user.username) {
+          throw new AuthenticationError("Only the question author can accept an answer")
+        }
+
+        // Reset all answers for this question to not accepted
+        await Answer.updateMany({ questionId: answer.questionId }, { isAccepted: false })
+
+        // Set this answer as accepted
+        const updatedAnswer = await Answer.findByIdAndUpdate(answerId, { isAccepted: true }, { new: true })
+
+        return updatedAnswer
+      }
+      throw new AuthenticationError("You need to be logged in!")
+    },
+    deleteQuestion: async (parent, { questionId }, context) => {
+      if (context.user) {
+        const question = await Question.findById(questionId)
+
+        if (!question) {
+          throw new Error("Question not found")
+        }
+
+        // Check if the current user is the owner of the question
+        if (question.username !== context.user.username) {
+          throw new AuthenticationError("You can only delete questions you've created")
+        }
+
+        // Delete all answers associated with this question
+        await Answer.deleteMany({ questionId })
+
+        // Delete the question
+        await Question.findByIdAndDelete(questionId)
+
+        return question
+      }
+      throw new AuthenticationError("You need to be logged in!")
+    },
+    deleteAnswer: async (parent, { answerId }, context) => {
+      if (context.user) {
+        const answer = await Answer.findById(answerId)
+
+        if (!answer) {
+          throw new Error("Answer not found")
+        }
+
+        // Check if the current user is the owner of the answer
+        if (answer.username !== context.user.username) {
+          throw new AuthenticationError("You can only delete answers you've created")
+        }
+
+        // Remove the answer from the question's answers array
+        await Question.findByIdAndUpdate(answer.questionId, { $pull: { answers: answerId } })
+
+        // Delete the answer
+        await Answer.findByIdAndDelete(answerId)
+
+        return answer
       }
       throw new AuthenticationError("You need to be logged in!")
     },

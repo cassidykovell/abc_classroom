@@ -89,7 +89,7 @@ const Signup = () => {
       </form>
       <p className="mt-4 text-center text-gray-700">
         Already have an account?{" "}
-        <Link to="/login" className="text-pastel-purple hover:underline">
+        <Link to="/login" className="text-pastel-darkPurple hover:underline">
           Login
         </Link>
       </p>
@@ -98,3 +98,4 @@ const Signup = () => {
 }
 
 export default Signup
+
