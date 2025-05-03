@@ -8,7 +8,7 @@ import SearchBar from "../components/SearchBar"
 
 const Home = () => {
   const [searchTerm, setSearchTerm] = useState("")
-  const { loading, error, data, refetch } = useQuery(QUERY_ACTIVITIES, {
+  const { loading, error, data } = useQuery(QUERY_ACTIVITIES, {
     variables: { searchTerm },
     fetchPolicy: "network-only", 
   })

@@ -141,12 +141,12 @@ const ActivityDetail = () => {
                 >
                   Delete Activity
                 </button>
-                <button
+                {/* <button
                   onClick={handleDownload}
                   className="bg-pastel-blue text-gray-800 px-4 py-2 rounded hover:bg-opacity-80"
                 >
                   Download
-                </button>
+                </button> */}
               </>
             ) : (
               <>
@@ -156,12 +156,12 @@ const ActivityDetail = () => {
                 >
                   Save Activity
                 </button>
-                <button
+                {/* <button
                   onClick={handleDownload}
                   className="bg-pastel-blue text-gray-800 px-4 py-2 rounded hover:bg-opacity-80"
                 >
                   Download
-                </button>
+                </button> */}
               </>
             )}
           </div>
